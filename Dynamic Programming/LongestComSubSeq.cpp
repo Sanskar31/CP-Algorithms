@@ -17,44 +17,49 @@ using namespace std;
 #define ff first
 #define ss second
 
-int LCS(string s1,string s2)
+void LCS(string S, string T)
 {
-    int n1=s1.length();
-    int n2=s2.length();
-    int dp[n1+1][n2+1];
-    for(int i=0;i<=n1;++i) dp[i][0]=0;
-    for(int i=0;i<=n2;++i) dp[0][i]=0;
-
-    for(int i=1;i<=n1;++i)
+    int s = S.length();
+    int t = T.length();
+    int dp[s + 1][t + 1];
+    for (int i = 0; i <= s; ++i)dp[i][0] = 0;
+    for (int i = 0; i <= t; ++i)dp[0][i] = 0;
+    for (int i = 1; i <= s; ++i)
     {
-        for(int j=1;j<=n2;++j)
+        for (int j = 1; j <= t; ++j)
         {
-            if(s1[i-1]==s2[j-1])
-            {
-                dp[i][j]=dp[i-1][j-1]+1;
-            }
+            if (S[i - 1] == T[j - 1])
+                dp[i][j] = 1 + dp[i - 1][j - 1];
             else
-                dp[i][j]= max(dp[i-1][j], dp[i][j-1]);
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
         }
     }
-    cout<<"OPTIMAL SUBSTRUCTURE:"<<endl;
-    cout<<"\t";
-    cout<<"\'\\0\'\t";
-    for(int i=0;i<=n2;++i)
-        cout<<s2[i]<<"\t";
-    cout<<endl;
-    for(int i=0;i<=n1;++i)
+    cout<<"Length Of LCS: "<<dp[s][t]<<endl<<"LCS is: ";
+    int i = s, j = t;
+    stack<char> st;
+    while (st.size() != dp[s][t])
     {
-        if(i!=0)
-            cout<<s1[i-1]<<"\t";
-        else 
-            cout<<"\'\\0\'\t";
-        for(int j=0;j<=n2;++j)
-            cout<<dp[i][j]<<"\t";
-        cout<<endl;
+        if (S[i - 1] == T[j - 1])
+        {
+            st.push(S[i - 1]);
+            i--, j--;
+        }
+        else
+        {
+            if (dp[i - 1][j] > dp[i][j - 1])
+                i--;
+            else
+                j--;
+        }
     }
-    cout<<"Length Of Longest Common Subsequence: ";
-    return dp[n1][n2];
+    if (st.empty())
+        cout << "" << endl;
+    while (!st.empty())
+    {
+        cout << st.top();
+        st.pop();
+    }
+    cout << endl;
 }
 
 int main()
@@ -64,8 +69,8 @@ int main()
     string s2= BCABABB
     */
     string s1, s2;
-    s1="AABCABB" ,s2="BCABABB";
+    s1 = "AABCABB" , s2 = "BCABABB";
     //cin>>s1>>s2;
-    cout<<LCS(s1, s2);
+    LCS(s1, s2);
     return 0;
 }
