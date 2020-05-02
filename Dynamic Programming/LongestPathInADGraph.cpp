@@ -1,6 +1,6 @@
 /*
 Author: Sanskar Agarwal
-Nick: sanskarag
+Nick: sanskaragarwal
 Birla Institute Of Technology, Mesra
 */
 #include <bits/stdc++.h>
