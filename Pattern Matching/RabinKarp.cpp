@@ -85,7 +85,8 @@ int main()
 #endif
 	fast
 	string text, pattern;
-	cin >> text >> pattern;
+	getline(cin, text);
+	getline(cin, pattern);
 	vector<ll> ans = rabinKarp(text, pattern);
 	for (auto i : ans)
 		cout << i << " ";

@@ -56,7 +56,8 @@ int main()
 #endif
 	fast
 	string text, pattern;
-	cin >> text >> pattern;
+	getline(cin, text);
+	getline(cin, pattern);
 	vector<int> ans = KMP(text, pattern);
 	cout << "Pattern found at index: ";
 	for (auto i : ans)
