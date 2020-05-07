@@ -20,7 +20,7 @@ using namespace std;
 
 vector<int> adj[100005], art;
 vector<pair<int, int> > bridge;
-int disc[100005], low[100005], tme = 0;
+int disc[100005], low[100005], tme = 1;
 
 void dfs(int curr, int par)
 {
@@ -38,7 +38,7 @@ void dfs(int curr, int par)
 			if (par != 0 && low[child] >= disc[curr])
 				art.push_back(curr);
 			//Bridge Edge
-			if (low[child] < disc[curr])
+			if (low[child] > disc[curr])
 				bridge.push_back({curr, child});
 		}
 		else if (child != par)
